@@ -104,27 +104,20 @@ print addr
 print
 print "Now to print the IP address in reverse: " + addr[::-1]
 print
-print "Now to print the IP address in reverse and rbl with it"
-print
-
-
-
-
 
 # reverse-ipaddress + RBLS. how do i do this
-
+print "Now to print the IP address in reverse and rbl with it"
 print addr[::-1] + '.' + '%s' % str(RBLS)
-
 raddr = addr[::-1]
 
-# reverse-ipaddress + RBLS. how do i do this
 
-
-
+# now to do the look of the dns entry
 
 cmd='dig %s.%s ' % (addr, RBLS)
 proc=subprocess.Popen(shlex.split(cmd),stdout=subprocess.PIPE)
 out,err=proc.communicate()
 print(out)
+
+
 
 
