@@ -93,8 +93,8 @@ RBLS = [
 ]
 
 
-hostname = 'ss63' #socket.gethostname()
-address = socket.gethostbyname("%s.mailtomars.com" % hostname)
+hostname = socket.gethostname()
+address = socket.gethostbyname("%s.local" % hostname)
 addr = address
 
 #ipaddress = raw_input('Please enter ip address: ')
