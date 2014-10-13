@@ -1,6 +1,12 @@
+
+#!/usr/bin/python
+
 import sys
 import os
 import csv
+import socket
+import subprocess
+import shlex
 
 RBLS = [
     'aspews.ext.sorbs.net',
@@ -86,7 +92,39 @@ RBLS = [
     'zombie.dnsbl.sorbs.net',
 ]
 
-ipaddress = raw_input('Please enter ip address: ')
-print 'You have typed - , %s' % ipaddress.capitalize()
 
-print ipaddress[::-1]
+hostname = 'ss63' #socket.gethostname()
+address = socket.gethostbyname("%s.mailtomars.com" % hostname)
+addr = address
+
+#ipaddress = raw_input('Please enter ip address: ')
+#print 'You have typed - , %s' % ipaddress.capitalize()
+
+print addr
+print
+print "Now to print the IP address in reverse: " + addr[::-1]
+print
+print "Now to print the IP address in reverse and rbl with it"
+print
+
+
+
+
+
+# reverse-ipaddress + RBLS. how do i do this
+
+print addr[::-1] + '.' + '%s' % str(RBLS)
+
+raddr = addr[::-1]
+
+# reverse-ipaddress + RBLS. how do i do this
+
+
+
+
+cmd='dig %s.%s ' % (addr, RBLS)
+proc=subprocess.Popen(shlex.split(cmd),stdout=subprocess.PIPE)
+out,err=proc.communicate()
+print(out)
+
+
