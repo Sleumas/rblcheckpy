@@ -129,7 +129,5 @@ print("\n")
 print "checking ip in RBL list ..."
 print("\n")
 for x in jRBLS:
-    cmd='dig %s' % (x)
-    proc=subprocess.Popen(shlex.split(cmd),stdout=subprocess.PIPE)
-    out,err=proc.communicate()
-print(out)
+    p1 = subprocess.Popen(["dig " + x + "+short"],  shell=True, stdout=subprocess.PIPE)
+    print p1.communicate()[0]
