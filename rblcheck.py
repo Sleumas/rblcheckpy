@@ -91,40 +91,45 @@ RBLS = [
     'zombie.dnsbl.sorbs.net',
 ]
 
+# To use any IP
+print("\n")
 
-hostname = socket.gethostname()
-address = socket.gethostbyname("%s.local" % hostname)
-addr = address
+addr = raw_input('Please enter ip address: ')
 
-#ipaddress = raw_input('Please enter ip address: ')
-#print 'You have typed - , %s' % ipaddress.capitalize()
+print("\n")
 
-print addr
-print
-print "Now to print the IP address in reverse: " + addr[::-1]
-print
+# Checking if IP address is entered
 
-# reverse-ipaddress + RBLS. how do i do this - Use List Comprehensions
+if addr != "":
+    print 'You have typed ' + addraddr
+else: 
+    # to use local IP
+    hostname = socket.gethostname()
+    address = socket.gethostbyname("%s.local" % hostname)
+    addr = address
+
+print "Using local IP : " + addr
+print("\n")
+
+# reverse IP
+raddr = addr[::-1]
+print "Your IP address in reverse : " + raddr
+print("\n")
 
 print "Now to print the IP address in reverse and rbl with it"
-print addr[::-1] + '.' + '%s' % str(RBLS)
-raddr = addr[::-1]
-
-# something like
-
-# new_list = []
-# for i in old_list:
-#    if filter(i):
-#        new_list.append(expressions(i))
-
+print("\n")
+# adding reversed ip to the dns name
+jRBLS = []
+for x in RBLS:
+    jRBLS.append(raddr+'.'+x)
+print jRBLS
 
 # now to do the look of the dns entry
-
-cmd='dig %s.%s ' % (addr, RBLS)
-proc=subprocess.Popen(shlex.split(cmd),stdout=subprocess.PIPE)
-out,err=proc.communicate()
+print("\n")
+print "checking ip in RBL list ..."
+print("\n")
+for x in jRBLS:
+    cmd='dig %s' % (x)
+    proc=subprocess.Popen(shlex.split(cmd),stdout=subprocess.PIPE)
+    out,err=proc.communicate()
 print(out)
-
-
-
-
