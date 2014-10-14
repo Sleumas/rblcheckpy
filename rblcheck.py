@@ -1,4 +1,3 @@
-
 #!/usr/bin/python
 
 import sys
@@ -105,10 +104,18 @@ print
 print "Now to print the IP address in reverse: " + addr[::-1]
 print
 
-# reverse-ipaddress + RBLS. how do i do this
+# reverse-ipaddress + RBLS. how do i do this - Use List Comprehensions
+
 print "Now to print the IP address in reverse and rbl with it"
 print addr[::-1] + '.' + '%s' % str(RBLS)
 raddr = addr[::-1]
+
+# something like
+
+# new_list = []
+# for i in old_list:
+#    if filter(i):
+#        new_list.append(expressions(i))
 
 
 # now to do the look of the dns entry
